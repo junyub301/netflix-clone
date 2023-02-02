@@ -2,25 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "../api/axios";
 import requests from "../api/request";
-
-interface Movie {
-    backdrop_path?: string;
-    first_air_date?: string;
-    genre_ids?: number[];
-    id?: number;
-    name?: string;
-    origin_country?: string[];
-    original_language?: string;
-    original_name?: string;
-    overview?: string;
-    popularity?: number;
-    poster_path?: string;
-    vote_average?: number;
-    vote_count?: number;
-}
+import { TV } from "../types";
 
 export default function Banner() {
-    const [movie, setMovie] = useState<Movie>({});
+    const [movie, setMovie] = useState<TV>({});
 
     useEffect(() => {
         async function fetchData() {
@@ -33,8 +18,6 @@ export default function Banner() {
         }
         fetchData();
     }, []);
-
-    console.log(movie);
 
     const truncate = (string: string, n: number) => {
         return string?.length > n ? string.substring(0, n - 1) + "..." : string;
