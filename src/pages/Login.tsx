@@ -3,12 +3,15 @@ import {
     signInWithEmailAndPassword,
 } from "firebase/auth";
 import React, { useRef } from "react";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { auth } from "../firebase";
+import { userState } from "../store/user";
 
 export default function Login() {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
+    const setUser = useSetRecoilState(userState);
 
     const register = (e: React.MouseEvent<HTMLSpanElement>) => {
         e.preventDefault();
@@ -34,7 +37,10 @@ export default function Login() {
                 passwordRef.current.value
             )
                 .then((authUser) => {
-                    console.log(authUser);
+                    const {
+                        user: { uid, email },
+                    } = authUser;
+                    setUser({ uid, email: email! });
                 })
                 .catch((error) => alert(error.message));
         }
