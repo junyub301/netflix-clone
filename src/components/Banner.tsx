@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "../api/axios";
 import requests from "../api/request";
 import { TV } from "../types";
+import Button from "./common/Button";
 
 export default function Banner() {
     const [movie, setMovie] = useState<TV>({});
@@ -29,8 +30,17 @@ export default function Banner() {
                     {movie.name || movie.original_name}
                 </h1>
                 <div className='banner__buttons'>
-                    <button className='banner__button'>Play</button>
-                    <button className='banner__button'>My List</button>
+                    <Button
+                        value='Play'
+                        className='banner__button'
+                        color='gray'
+                    />
+                    {/* <button className='banner__button'>Play</button> */}
+                    <Button
+                        className='banner__button'
+                        color='gray'
+                        value='My List'
+                    />
                 </div>
                 <h1 className='banner__description'>
                     {truncate(movie?.overview!, 150)}
@@ -65,17 +75,12 @@ const BannerWrap = styled.header<{ bgImg?: string }>`
             }
             &__buttons {
                 .banner__button {
-                    cursor: pointer;
-                    color: white;
-                    outline: none;
-                    border: none;
                     font-weight: 700;
                     border-radius: 0.2vw;
                     padding-left: 2rem;
                     padding-right: 2rem;
                     margin-right: 1rem;
                     padding-top: 0.5rem;
-                    background-color: rgba(51, 51, 51, 0.5);
                     padding-bottom: 0.5rem;
 
                     &:hover {

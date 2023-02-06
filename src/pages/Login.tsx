@@ -5,6 +5,7 @@ import {
 import React, { useRef } from "react";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import Button from "../components/common/Button";
 import { auth } from "../firebase";
 import { userState } from "../store/user";
 
@@ -59,9 +60,7 @@ export default function Login() {
                     placeholder='비밀번호'
                     type='password'
                 />
-                <button type='submit' onClick={signIn}>
-                    로그인
-                </button>
+                <Button value='로그인' type='submit' onClick={signIn} />
 
                 <h4>
                     <span className='sign_up__gray'>

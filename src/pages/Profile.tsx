@@ -1,6 +1,7 @@
 import React from "react";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import styled from "styled-components";
+import Button from "../components/common/Button";
 import Nav from "../components/Nav";
 import Plans from "../components/Plans";
 import { userState } from "../store/user";
@@ -23,12 +24,11 @@ export default function Profile() {
                         <div className='profile__plans'>
                             <h3>Plans</h3>
                             <Plans />
-                            <button
+                            <Button
                                 onClick={() => logout()}
                                 className='profile__logOut'
-                            >
-                                로그아웃
-                            </button>
+                                value='로그아웃'
+                            />
                         </div>
                     </div>
                 </div>
@@ -83,14 +83,8 @@ const ProfileWrap = styled.div`
 
                 .profile__logOut {
                     padding: 10px 20px;
-                    font-size: 1rem;
                     margin-top: 5%;
                     width: 100%;
-                    color: #fff;
-                    background-color: #e50914;
-                    font-weight: 600;
-                    border: none;
-                    cursor: pointer;
                 }
             }
         }

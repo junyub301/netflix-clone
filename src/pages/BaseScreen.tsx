@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Button from "../components/common/Button";
 import Login from "./Login";
 
 export default function BaseScreen() {
@@ -13,10 +14,11 @@ export default function BaseScreen() {
                     src='https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png'
                     alt='netflix_log'
                 />
-                <button onClick={() => setSignIn(true)} className='login__btn'>
-                    {" "}
-                    Sign In
-                </button>
+                <Button
+                    onClick={() => setSignIn(true)}
+                    className='login__btn'
+                    value='로그인'
+                />
 
                 <div className='login__gradient'></div>
             </div>
@@ -71,11 +73,7 @@ const BaseWrap = styled.div`
             right: 20px;
             top: 20px;
             padding: 10px 20px;
-            color: #fff;
-            background-color: #e50914;
             font-weight: 800;
-            border: none;
-            cursor: pointer;
         }
         .login__gradient {
             width: 100%;

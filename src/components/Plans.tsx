@@ -2,6 +2,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import db from "../firebase";
+import Button from "./common/Button";
 
 function Plans() {
     const [products, setProducts] = useState<any[]>([]);
@@ -43,13 +44,12 @@ function Plans() {
                             <h5>{productData.name}</h5>
                             <h6>{productData.description}</h6>
                         </div>
-                        <button
+                        <Button
                             onClick={() =>
                                 loadCheckout(productData.prices.priceId)
                             }
-                        >
-                            Subscribe
-                        </button>
+                            value='Subscribe'
+                        />
                     </Plan>
                 );
             })}
@@ -70,9 +70,6 @@ const Plan = styled.div`
     }
     button {
         padding: 10px 20px;
-        font-size: 1rem;
-        color: #fff;
-        background-color: #e50914;
         font-weight: 400;
         border: none;
         cursor: pointer;
