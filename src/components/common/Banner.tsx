@@ -1,23 +1,31 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "../api/axios";
-import requests from "../api/request";
-import { TV } from "../types";
-import Button from "./common/Button";
+import { homeApi } from "../../api/request";
+import { Movie, TV } from "../../types";
+import Button from "./Button";
 
-export default function Banner() {
-    const [movie, setMovie] = useState<TV>({});
+type BannerPropsTypes = Movie | TV;
+
+interface BannerProps<T extends BannerPropsTypes> {
+    movieInfo?: T;
+}
+
+export default function Banner<T extends BannerPropsTypes>({
+    movieInfo,
+}: BannerProps<T>) {
+    const [movie, setMovie] = useState<BannerPropsTypes>(movieInfo || {});
 
     useEffect(() => {
         async function fetchData() {
-            const request = await axios.get(requests.fetchNetflixOriginals);
-            setMovie(
-                request?.data?.results[
-                    Math.floor(Math.random() * request.data.results.length - 1)
-                ]
-            );
+            const {
+                data: { results },
+            } = await homeApi.fetchDiscoverTv();
+
+            setMovie(results[Math.floor(Math.random() * results.length - 1)]);
         }
-        fetchData();
+        if (!movie.id) {
+            fetchData();
+        }
     }, []);
 
     const truncate = (string: string, n: number) => {
@@ -27,7 +35,10 @@ export default function Banner() {
         <BannerWrap bgImg={movie?.backdrop_path}>
             <div className='banner__contents'>
                 <h1 className='banner__title'>
-                    {movie.name || movie.original_name}
+                    {(movie as TV).name ||
+                        (movie as TV).original_name ||
+                        (movie as Movie).title ||
+                        (movie as Movie).original_title}
                 </h1>
                 <div className='banner__buttons'>
                     <Button
@@ -35,7 +46,6 @@ export default function Banner() {
                         className='banner__button'
                         color='gray'
                     />
-                    {/* <button className='banner__button'>Play</button> */}
                     <Button
                         className='banner__button'
                         color='gray'

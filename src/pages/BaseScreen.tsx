@@ -90,7 +90,7 @@ const BaseWrap = styled.div`
     }
     .login__body {
         position: absolute;
-        top: 30%;
+        top: 20vh;
         margin-left: auto;
         margin-right: auto;
         text-align: center;

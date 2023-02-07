@@ -2,7 +2,6 @@ import React from "react";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import styled from "styled-components";
 import Button from "../components/common/Button";
-import Nav from "../components/Nav";
 import Plans from "../components/Plans";
 import { userState } from "../store/user";
 
@@ -11,7 +10,6 @@ export default function Profile() {
     const logout = useResetRecoilState(userState);
     return (
         <ProfileWrap>
-            <Nav />
             <div className='profile__body'>
                 <h1>Edit profile</h1>
                 <div className='profile__info'>

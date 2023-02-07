@@ -1,34 +1,41 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "../api/axios";
-import { Movie, TV } from "../types";
+import { Movie, Trend, TV } from "../types";
+import Poster from "./Poster";
 
-interface RowProps {
+type RowPropsTypes = Movie | TV | Trend;
+
+interface RowProps<T extends RowPropsTypes> {
     title: string;
-    fetchUrl: string;
     isLargeRow?: boolean;
+    contents: T[];
 }
-export default function Row({ title, fetchUrl, isLargeRow = false }: RowProps) {
-    const [movies, setMovies] = useState<TV[] | Movie[]>([]);
-    const imgBasicUrl = "https://image.tmdb.org/t/p/original";
-
-    useEffect(() => {
-        async function fetchData() {
-            const { data } = await axios.get(fetchUrl);
-            setMovies(data?.results);
-        }
-        fetchData();
-    }, [fetchUrl]);
-
+export default function Row<T extends RowPropsTypes>({
+    title,
+    contents,
+    isLargeRow = false,
+}: RowProps<T>) {
     return (
         <RowWrap>
             <h2>{title}</h2>
             <div className='row__posters'>
-                {movies?.map(
-                    (movie) =>
-                        ((isLargeRow && movie.poster_path) ||
-                            (!isLargeRow && movie.backdrop_path)) && (
-                            <img
+                {contents?.map(
+                    (contents) =>
+                        ((isLargeRow && contents.poster_path) ||
+                            (!isLargeRow && contents.backdrop_path)) && (
+                            <Poster
+                                key={contents.id}
+                                movie={contents}
+                                isLargeRow={isLargeRow}
+                            />
+                        )
+                )}
+            </div>
+        </RowWrap>
+    );
+}
+{
+    /* <img
                                 className={`row__poster ${
                                     isLargeRow && "row__posterLarge"
                                 }`}
@@ -41,12 +48,7 @@ export default function Row({ title, fetchUrl, isLargeRow = false }: RowProps) {
                                 alt={
                                     (movie as TV).name || (movie as Movie).title
                                 }
-                            />
-                        )
-                )}
-            </div>
-        </RowWrap>
-    );
+                            /> */
 }
 
 const RowWrap = styled.div`
@@ -60,7 +62,7 @@ const RowWrap = styled.div`
         &::-webkit-scrollbar {
             display: none;
         }
-        .row__poster {
+        /* .row__poster {
             max-height: 100px;
             object-fit: contain;
             margin-right: 10px;
@@ -68,13 +70,13 @@ const RowWrap = styled.div`
             transition: transform 450ms;
 
             &:hover {
-                transform: scale(1.08);
+                transform: scale(1.1);
                 opacity: 1;
             }
 
             &.row__posterLarge {
                 max-height: 250px;
             }
-        }
+        } */
     }
 `;
