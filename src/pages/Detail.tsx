@@ -5,7 +5,10 @@ import Banner from "../components/common/Banner";
 
 export default function Detail() {
     const { id } = useParams();
-    useEffect(() => {}, [id]);
+
+    useEffect(() => {
+        async function getDetailContent() {}
+    }, [id]);
     return (
         <DetailWrap>
             <Banner />

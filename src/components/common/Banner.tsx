@@ -35,10 +35,10 @@ export default function Banner<T extends BannerPropsTypes>({
         <BannerWrap bgImg={movie?.backdrop_path}>
             <div className='banner__contents'>
                 <h1 className='banner__title'>
-                    {(movie as TV).name ||
-                        (movie as TV).original_name ||
-                        (movie as Movie).title ||
-                        (movie as Movie).original_title}
+                    {(movie as TV)?.name ||
+                        (movie as TV)?.original_name ||
+                        (movie as Movie)?.title ||
+                        (movie as Movie)?.original_title}
                 </h1>
                 <div className='banner__buttons'>
                     <Button

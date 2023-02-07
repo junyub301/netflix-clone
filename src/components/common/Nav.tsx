@@ -22,7 +22,7 @@ export default function Nav() {
             <div className='nav__contents'>
                 <div className='nav__link'>
                     <img
-                        onClick={() => navigate("/")}
+                        onClick={() => navigate("/browse")}
                         className='nav__logo'
                         src='https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png'
                         alt='netflix_log'
