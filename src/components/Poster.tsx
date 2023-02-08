@@ -1,27 +1,48 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Movie, TV } from "../types";
 import { cls } from "../utils";
 
 interface PosterProps {
     isLargeRow?: boolean;
-    movie: TV | Movie;
+    poster_path: string;
+    backdrop_path: string;
+    media_type?: string;
+    name?: string;
+    title?: string;
+    type: string;
+    id: number;
 }
 
-function Poster({ isLargeRow = false, movie }: PosterProps) {
+function Poster({
+    isLargeRow = false,
+    poster_path,
+    backdrop_path,
+    name,
+    title,
+    type,
+    media_type,
+    id,
+}: PosterProps) {
     const imgBasicUrl = "https://image.tmdb.org/t/p/original";
     const navigate = useNavigate();
+    const location = useLocation();
     const onClick = () => {
-        navigate(`/detail/${movie.id}`);
+        if (
+            location.pathname.includes("movie") ||
+            location.pathname.includes("tv")
+        ) {
+            navigate(`${location.pathname}/${id}`);
+        } else {
+            let pathName = `${location.pathname}/${media_type}`;
+            navigate(`${pathName}/${id}`);
+        }
     };
     return (
         <PostWrap
             onClick={onClick}
             className={cls("row__poster", isLargeRow ? "row__posterLarge" : "")}
-            src={`${imgBasicUrl}${
-                isLargeRow ? movie.poster_path : movie.backdrop_path
-            }`}
-            alt={(movie as TV).name || (movie as Movie).title}
+            src={`${imgBasicUrl}${isLargeRow ? poster_path : backdrop_path}`}
+            alt={name || title}
         />
     );
 }

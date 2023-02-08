@@ -1,61 +1,61 @@
 import Banner from "../components/common/Banner";
 import Row from "../components/Row";
-import { Movie as MovieType } from "../types";
+import { TV as TvType } from "../types";
 
-interface MovieProps {
-    contents?: MovieContents;
+interface TvProps {
+    contents?: TvContents;
 }
 
-export interface MovieContents {
-    topRate: MovieType[];
-    nowPlaying: MovieType[];
-    popular: MovieType[];
-    actionMovies: MovieType[];
-    comedyMovies: MovieType[];
-    horrorMovies: MovieType[];
-    romanceMovies: MovieType[];
-    documentaries: MovieType[];
+export interface TvContents {
+    topRate: TvType[];
+    nowPlaying: TvType[];
+    popular: TvType[];
+    actionTvs: TvType[];
+    comedyTvs: TvType[];
+    horrorTvs: TvType[];
+    romanceTvs: TvType[];
+    documentaries: TvType[];
 }
-export default function Movie({ contents }: MovieProps) {
+export default function TV({ contents }: TvProps) {
     return contents !== undefined ? (
         <>
             <Banner movieInfo={contents.topRate[0]} />
-            <Row<MovieType>
-                title='TOP 20 영화'
+            <Row<TvType>
+                title='TOP 20 드라마'
                 isLargeRow
                 contents={contents.topRate}
             />
-            <Row<MovieType>
-                title='상영중인영화'
+            <Row<TvType>
+                title='상영중인 드라마'
                 isLargeRow
                 contents={contents.nowPlaying}
             />
-            <Row<MovieType>
+            <Row<TvType>
                 title='인기 콘텐츠'
                 isLargeRow
                 contents={contents.popular}
             />
-            <Row<MovieType>
+            <Row<TvType>
                 title='액션'
                 isLargeRow
-                contents={contents.actionMovies}
+                contents={contents.actionTvs}
             />
-            <Row<MovieType>
+            <Row<TvType>
                 title='코미디'
                 isLargeRow
-                contents={contents.comedyMovies}
+                contents={contents.comedyTvs}
             />
-            <Row<MovieType>
+            <Row<TvType>
                 title='호러'
                 isLargeRow
-                contents={contents.horrorMovies}
+                contents={contents.horrorTvs}
             />
-            <Row<MovieType>
+            <Row<TvType>
                 title='로맨스'
                 isLargeRow
-                contents={contents.romanceMovies}
+                contents={contents.romanceTvs}
             />
-            <Row<MovieType>
+            <Row<TvType>
                 title='다큐'
                 isLargeRow
                 contents={contents.documentaries}

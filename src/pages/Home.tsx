@@ -19,9 +19,13 @@ export default function Home({
     return (
         <>
             <Banner movieInfo={trendContents[0]} />
-            <Row title='지금 뜨는 콘텐츠' isLargeRow contents={trendContents} />
-            <Row title='인기 영화' isLargeRow contents={topMovies} />
-            <Row title='인기 TV' isLargeRow contents={topTv} />
+            <Row<Trend>
+                title='지금 뜨는 콘텐츠'
+                isLargeRow
+                contents={trendContents}
+            />
+            <Row<Movie> title='인기 영화' isLargeRow contents={topMovies} />
+            <Row<TV> title='인기 TV' isLargeRow contents={topTv} />
         </>
     );
 }

@@ -25,7 +25,13 @@ export default function Row<T extends RowPropsTypes>({
                             (!isLargeRow && contents.backdrop_path)) && (
                             <Poster
                                 key={contents.id}
-                                movie={contents}
+                                id={contents.id!}
+                                backdrop_path={contents?.backdrop_path!}
+                                poster_path={contents?.poster_path!}
+                                name={(contents as TV).name}
+                                media_type={(contents as Trend).media_type}
+                                title={(contents as Movie).title}
+                                type=''
                                 isLargeRow={isLargeRow}
                             />
                         )

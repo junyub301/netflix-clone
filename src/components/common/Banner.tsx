@@ -4,16 +4,12 @@ import { homeApi } from "../../api/request";
 import { Movie, TV } from "../../types";
 import Button from "./Button";
 
-type BannerPropsTypes = Movie | TV;
-
-interface BannerProps<T extends BannerPropsTypes> {
-    movieInfo?: T;
+interface BannerProps {
+    movieInfo?: any;
 }
 
-export default function Banner<T extends BannerPropsTypes>({
-    movieInfo,
-}: BannerProps<T>) {
-    const [movie, setMovie] = useState<BannerPropsTypes>(movieInfo || {});
+export default function Banner({ movieInfo }: BannerProps) {
+    const [movie, setMovie] = useState<any>({});
 
     useEffect(() => {
         async function fetchData() {
@@ -23,8 +19,10 @@ export default function Banner<T extends BannerPropsTypes>({
 
             setMovie(results[Math.floor(Math.random() * results.length - 1)]);
         }
-        if (!movie.id) {
+        if (!movieInfo) {
             fetchData();
+        } else {
+            setMovie(movieInfo);
         }
     }, []);
 
@@ -33,12 +31,13 @@ export default function Banner<T extends BannerPropsTypes>({
     };
     return (
         <BannerWrap bgImg={movie?.backdrop_path}>
+            <img src={movie?.backdrop_path} alt='' />
             <div className='banner__contents'>
                 <h1 className='banner__title'>
-                    {(movie as TV)?.name ||
-                        (movie as TV)?.original_name ||
-                        (movie as Movie)?.title ||
-                        (movie as Movie)?.original_title}
+                    {movie?.name ||
+                        movie?.original_name ||
+                        movie?.title ||
+                        movie?.original_title}
                 </h1>
                 <div className='banner__buttons'>
                     <Button
@@ -67,6 +66,7 @@ const BannerWrap = styled.header<{ bgImg?: string }>`
     color: white;
     object-fit: contain;
     background-size: cover;
+    padding-top: 100px;
 
     background-image: ${(props) =>
         props.bgImg

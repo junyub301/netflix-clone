@@ -27,7 +27,25 @@ export const movieApi = {
         }),
 };
 
-export const tvApi = {};
+export const tvApi = {
+    fetchTopRate: () => axios.get("/tv/top_rated"),
+    fetchNowPlaying: () => axios.get("/tv/on_the_air"),
+    fetchPopular: () => axios.get("/tv/popular"),
+    fetchActionMovies: () =>
+        axios.get("/discover/tv", { params: { with_genres: 28 } }),
+    fetchComedyMovies: () =>
+        axios.get("/discover/tv", { params: { with_genres: 35 } }),
+    fetchHorrorMovies: () =>
+        axios.get("/discover/tv", { params: { with_genres: 27 } }),
+    fetchRomanceMovies: () =>
+        axios.get("/discover/tv", { params: { with_genres: 10749 } }),
+    fetchDocumentaries: () =>
+        axios.get("/discover/tv", { params: { with_genres: 99 } }),
+    fetchDetailTv: (id: number) =>
+        axios.get(`/tv/${id}`, {
+            params: { append_to_response: "videos,casts" },
+        }),
+};
 
 const requests = {
     fetchTrending: `/trending/all/week`,

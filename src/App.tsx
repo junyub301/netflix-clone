@@ -12,6 +12,7 @@ import Nav from "./components/common/Nav";
 import Detail from "./pages/Detail";
 import Movie from "./pages/Movie";
 import Browse from "./pages/Browse";
+import TV from "./pages/TV";
 
 function App() {
     const [user, setUser] = useRecoilState(userState);
@@ -35,9 +36,11 @@ function App() {
                         <Routes>
                             <Route path='/browse' element={<Browse />}>
                                 <Route path='movie' element={<Movie />} />
+                                <Route path='tv' element={<TV />} />
+                                <Route path='movie/:id' element={<Detail />} />
+                                <Route path='tv/:id' element={<Detail />} />
                             </Route>
                             <Route path='/profile' element={<Profile />} />
-                            <Route path='/detail/:id' element={<Detail />} />
                         </Routes>
                     </>
                 )}
