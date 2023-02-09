@@ -31,7 +31,6 @@ export default function Banner({ movieInfo }: BannerProps) {
     };
     return (
         <BannerWrap bgImg={movie?.backdrop_path}>
-            <img src={movie?.backdrop_path} alt='' />
             <div className='banner__contents'>
                 <h1 className='banner__title'>
                     {movie?.name ||
@@ -67,6 +66,7 @@ const BannerWrap = styled.header<{ bgImg?: string }>`
     object-fit: contain;
     background-size: cover;
     padding-top: 100px;
+    margin-bottom: 3rem;
 
     background-image: ${(props) =>
         props.bgImg

@@ -1,5 +1,5 @@
 import Banner from "../components/common/Banner";
-import Row from "../components/Row";
+import Row from "../components/Browse/Row";
 import { Movie as MovieType } from "../types";
 
 interface MovieProps {

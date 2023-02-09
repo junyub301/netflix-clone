@@ -1,6 +1,6 @@
 import React from "react";
 import Banner from "../components/common/Banner";
-import Row from "../components/Row";
+import Row from "../components/Browse/Row";
 import { Movie, Trend, TV } from "../types";
 
 interface HomeProps {

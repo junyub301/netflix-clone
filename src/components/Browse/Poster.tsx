@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { cls } from "../utils";
+import { cls } from "../../utils";
 
 interface PosterProps {
     isLargeRow?: boolean;
@@ -9,7 +9,6 @@ interface PosterProps {
     media_type?: string;
     name?: string;
     title?: string;
-    type: string;
     id: number;
 }
 
@@ -19,7 +18,6 @@ function Poster({
     backdrop_path,
     name,
     title,
-    type,
     media_type,
     id,
 }: PosterProps) {

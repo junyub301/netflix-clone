@@ -42,13 +42,17 @@ export interface Trend extends Content {
 interface Detail {
     adult: boolean;
     backdrop_path: string;
-    credits: { cats: Cast[]; crew: Crew[] };
+    credits: { cast: Cast[]; crew: Crew[] };
     genres: {
         id: number;
         name: string;
     }[];
     homepage: string;
     id: number;
+    keywords: {
+        keywords?: { id: string; name: string }[];
+        results?: { id: string; name: string }[];
+    };
 
     original_language: string;
     overview: string;
@@ -77,20 +81,8 @@ interface Detail {
     tagline: string;
     vote_average: number;
     vote_count: number;
-    videos: {
-        results: {
-            iso_639_1: string;
-            iso_3166_1: string;
-            name: string;
-            key: string;
-            site: string;
-            size: number;
-            type: string;
-            official: false;
-            published_at: string;
-            id: string;
-        }[];
-    };
+    videos: { results: Video[] };
+    recommendations: { results: Recommendation[] };
 }
 
 export interface MovieDetail extends Detail {
@@ -167,7 +159,7 @@ export interface TvDetail extends Detail {
     type: string;
 }
 
-interface Cast {
+export interface Cast {
     adult: boolean;
     gender: number;
     id: number;
@@ -181,7 +173,32 @@ interface Cast {
     credit_id: string;
     order?: number;
 }
-interface Crew extends Cast {
+export interface Crew extends Cast {
     department: "Production";
     job: "Casting";
+}
+
+export interface Video {
+    iso_639_1: string;
+    iso_3166_1: string;
+    name: string;
+    key: string;
+    site: string;
+    size: number;
+    type: string;
+    official: false;
+    published_at: string;
+    id: string;
+}
+
+interface Recommendation {
+    poster_path?: string;
+    backdrop_path?: string;
+    id: number;
+    title?: string;
+    original_title?: string;
+    name?: string;
+    original_name?: string;
+    vote_average?: number;
+    [key: string]: any;
 }

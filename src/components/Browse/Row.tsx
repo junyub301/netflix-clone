@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Movie, Trend, TV } from "../types";
+import { Movie, Trend, TV } from "../../types";
 import Poster from "./Poster";
 
 type RowPropsTypes = Movie | TV | Trend;
@@ -31,7 +30,6 @@ export default function Row<T extends RowPropsTypes>({
                                 name={(contents as TV).name}
                                 media_type={(contents as Trend).media_type}
                                 title={(contents as Movie).title}
-                                type=''
                                 isLargeRow={isLargeRow}
                             />
                         )

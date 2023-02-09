@@ -23,7 +23,9 @@ export const movieApi = {
         axios.get("/discover/movie", { params: { with_genres: 99 } }),
     fetchDetailMovie: (id: number) =>
         axios.get(`/movie/${id}`, {
-            params: { append_to_response: "videos,casts" },
+            params: {
+                append_to_response: "videos,credits,keywords,recommendations",
+            },
         }),
 };
 
@@ -43,7 +45,9 @@ export const tvApi = {
         axios.get("/discover/tv", { params: { with_genres: 99 } }),
     fetchDetailTv: (id: number) =>
         axios.get(`/tv/${id}`, {
-            params: { append_to_response: "videos,casts" },
+            params: {
+                append_to_response: "videos,credits,keywords,recommendations",
+            },
         }),
 };
 
