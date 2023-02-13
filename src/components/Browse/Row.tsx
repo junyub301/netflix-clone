@@ -7,11 +7,13 @@ type RowPropsTypes = Movie | TV | Trend;
 interface RowProps<T extends RowPropsTypes> {
     title: string;
     isLargeRow?: boolean;
+    type?: string;
     contents: T[];
 }
 export default function Row<T extends RowPropsTypes>({
     title,
     contents,
+    type,
     isLargeRow = false,
 }: RowProps<T>) {
     return (
@@ -27,9 +29,13 @@ export default function Row<T extends RowPropsTypes>({
                                 id={contents.id!}
                                 backdrop_path={contents?.backdrop_path!}
                                 poster_path={contents?.poster_path!}
-                                name={(contents as TV).name}
-                                media_type={(contents as Trend).media_type}
-                                title={(contents as Movie).title}
+                                media_type={
+                                    (contents as Trend).media_type || type
+                                }
+                                title={
+                                    (contents as Movie).title ||
+                                    (contents as TV).name
+                                }
                                 isLargeRow={isLargeRow}
                             />
                         )
@@ -38,49 +44,27 @@ export default function Row<T extends RowPropsTypes>({
         </RowWrap>
     );
 }
-{
-    /* <img
-                                className={`row__poster ${
-                                    isLargeRow && "row__posterLarge"
-                                }`}
-                                key={movie.id}
-                                src={`${imgBasicUrl}${
-                                    isLargeRow
-                                        ? movie.poster_path
-                                        : movie.backdrop_path
-                                }`}
-                                alt={
-                                    (movie as TV).name || (movie as Movie).title
-                                }
-                            /> */
-}
 
 const RowWrap = styled.div`
     color: white;
     margin-left: 20px;
     .row__posters {
+        position: relative;
+        width: 100%;
         display: flex;
+        flex-wrap: nowrap;
+        gap: 20px;
+        /* white-space: nowrap; */
         overflow-y: hidden;
         overflow-x: scroll;
         padding: 20px;
         &::-webkit-scrollbar {
             display: none;
         }
-        /* .row__poster {
-            max-height: 100px;
-            object-fit: contain;
-            margin-right: 10px;
-            width: 100%;
-            transition: transform 450ms;
 
-            &:hover {
-                transform: scale(1.1);
-                opacity: 1;
-            }
-
-            &.row__posterLarge {
-                max-height: 250px;
-            }
-        } */
+        div {
+            width: 220px;
+            /* display: inline-block; */
+        }
     }
 `;

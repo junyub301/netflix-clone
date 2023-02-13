@@ -49,7 +49,9 @@ function Plans() {
                                 loadCheckout(productData.prices.priceId)
                             }
                             value='Subscribe'
-                        />
+                        >
+                            Subscribe
+                        </Button>
                     </Plan>
                 );
             })}

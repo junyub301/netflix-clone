@@ -26,7 +26,9 @@ export default function Profile() {
                                 onClick={() => logout()}
                                 className='profile__logOut'
                                 value='로그아웃'
-                            />
+                            >
+                                로그아웃
+                            </Button>
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 interface ButtonProps {
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     value: string;
-    label?: string;
+    children?: React.ReactNode;
     size?: "sm" | "md" | "lg";
     color?: "red" | "gray";
     className?: string;
@@ -46,7 +46,7 @@ const COLORS = {
 export default function Button({
     onClick,
     value,
-    label,
+    children,
     className,
     size = "md",
     color = "red",
@@ -61,9 +61,9 @@ export default function Button({
             className={className ? className : undefined}
             onClick={onClick}
             value={value}
-            {...resolveTo}
+            {...rest}
         >
-            {label ? label : value}
+            {children}
         </CustomButton>
     );
 }

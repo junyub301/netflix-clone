@@ -1,27 +1,26 @@
 interface Content {
-    backdrop_path?: string;
-    genre_ids?: number[];
+    backdrop_path: string;
+    genre_ids: number[];
     id?: number;
-    original_language?: string;
-    overview?: string;
-    popularity?: number;
-    poster_path?: string;
-    vote_average?: number;
-    vote_count?: number;
+    original_language: string;
+    overview: string;
+    popularity: number;
+    poster_path: string;
+    vote_average: number;
+    vote_count: number;
 }
 
 export interface TV extends Content {
+    media_type: "tv";
     first_air_date?: string;
     name?: string;
-    media_type?: string;
-
     origin_country?: string[];
     original_name?: string;
 }
 
 export interface Movie extends Content {
+    media_type: "movie";
     adult?: boolean;
-    media_type?: string;
     original_title?: string;
     release_date?: string;
     title?: string;
@@ -31,8 +30,8 @@ export interface Movie extends Content {
 export interface Trend extends Content {
     adult: boolean;
     title: string;
-    original_title: string;
     media_type: string;
+    original_title: string;
     genre_ids: number[];
     popularity: number;
     release_date: string;

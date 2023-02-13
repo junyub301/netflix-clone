@@ -60,7 +60,9 @@ export default function Login() {
                     placeholder='비밀번호'
                     type='password'
                 />
-                <Button value='로그인' type='submit' onClick={signIn} />
+                <Button value='로그인' type='submit' onClick={signIn}>
+                    로그인
+                </Button>
 
                 <h4>
                     <span className='sign_up__gray'>

@@ -34,7 +34,7 @@ export default function Detail() {
                                 {content.name ||
                                     content.original_name ||
                                     content.title ||
-                                    content.original_title}{" "}
+                                    content.original_title}
                             </h2>
                             <div>
                                 <div className='info__row'>

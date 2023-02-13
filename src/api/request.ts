@@ -33,12 +33,12 @@ export const tvApi = {
     fetchTopRate: () => axios.get("/tv/top_rated"),
     fetchNowPlaying: () => axios.get("/tv/on_the_air"),
     fetchPopular: () => axios.get("/tv/popular"),
-    fetchActionMovies: () =>
-        axios.get("/discover/tv", { params: { with_genres: 28 } }),
+    fetchMysteryMovies: () =>
+        axios.get("/discover/tv", { params: { with_genres: 9648 } }),
     fetchComedyMovies: () =>
         axios.get("/discover/tv", { params: { with_genres: 35 } }),
-    fetchHorrorMovies: () =>
-        axios.get("/discover/tv", { params: { with_genres: 27 } }),
+    fetchAniMovies: () =>
+        axios.get("/discover/tv", { params: { with_genres: 16 } }),
     fetchRomanceMovies: () =>
         axios.get("/discover/tv", { params: { with_genres: 10749 } }),
     fetchDocumentaries: () =>
@@ -50,16 +50,3 @@ export const tvApi = {
             },
         }),
 };
-
-const requests = {
-    fetchTrending: `/trending/all/week`,
-    fetchNetflixOriginals: `/discover/tv`,
-    fetchTopRate: `/movie/top_rated`,
-    fetchActionMovies: `/discover/movie?with_genres=28`,
-    fetchComedyMovies: `/discover/movie?with_genres=35`,
-    fetchHorrorMovies: `/discover/movie?with_genres=27`,
-    fetchRomanceMovies: `/discover/movie?with_genres=10749`,
-    fetchDocumentaries: `/discover/movie?with_genres=99`,
-};
-
-export default requests;

@@ -43,12 +43,16 @@ export default function Banner({ movieInfo }: BannerProps) {
                         value='Play'
                         className='banner__button'
                         color='gray'
-                    />
+                    >
+                        Play
+                    </Button>
                     <Button
                         className='banner__button'
                         color='gray'
                         value='My List'
-                    />
+                    >
+                        My List
+                    </Button>
                 </div>
                 <h1 className='banner__description'>
                     {truncate(movie?.overview!, 150)}

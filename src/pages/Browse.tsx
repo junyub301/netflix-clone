@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { homeApi, movieApi, tvApi } from "../api/request";
-import useInfiniteScroll from "../hooks/useInfiniteScroll";
 import Home, { HomeContent } from "./Home";
 import Movie, { MovieContents } from "./Movie";
 import TV, { TvContents } from "./TV";
@@ -12,8 +11,6 @@ export default function Browse() {
     const [homeContents, setHomeContents] = useState<HomeContent>();
     const [movieContents, setMovieContents] = useState<MovieContents>();
     const [tvContents, setTvContents] = useState<TvContents>();
-
-    const page = useInfiniteScroll();
 
     const getHomeContents = async () => {
         const {
@@ -75,14 +72,14 @@ export default function Browse() {
             data: { results: popular },
         } = await tvApi.fetchPopular();
         const {
-            data: { results: actionTvs },
-        } = await tvApi.fetchActionMovies();
+            data: { results: mysteryTvs },
+        } = await tvApi.fetchMysteryMovies();
         const {
             data: { results: comedyTvs },
         } = await tvApi.fetchComedyMovies();
         const {
-            data: { results: horrorTvs },
-        } = await tvApi.fetchHorrorMovies();
+            data: { results: aniTvs },
+        } = await tvApi.fetchAniMovies();
         const {
             data: { results: romanceTvs },
         } = await tvApi.fetchRomanceMovies();
@@ -93,9 +90,9 @@ export default function Browse() {
             topRate,
             nowPlaying,
             popular,
-            actionTvs,
+            mysteryTvs,
             comedyTvs,
-            horrorTvs,
+            aniTvs,
             romanceTvs,
             documentaries,
         });
@@ -122,10 +119,9 @@ export default function Browse() {
                 location.pathname === "/browse/movie" && (
                     <Movie contents={movieContents} />
                 )}
-            {movieContents !== undefined &&
-                location.pathname === "/browse/tv" && (
-                    <TV contents={tvContents} />
-                )}
+            {tvContents !== undefined && location.pathname === "/browse/tv" && (
+                <TV contents={tvContents} />
+            )}
         </BrowseWrap>
     );
 }

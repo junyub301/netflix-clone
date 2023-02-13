@@ -10,9 +10,9 @@ export interface TvContents {
     topRate: TvType[];
     nowPlaying: TvType[];
     popular: TvType[];
-    actionTvs: TvType[];
+    mysteryTvs: TvType[];
     comedyTvs: TvType[];
-    horrorTvs: TvType[];
+    aniTvs: TvType[];
     romanceTvs: TvType[];
     documentaries: TvType[];
 }
@@ -36,20 +36,16 @@ export default function TV({ contents }: TvProps) {
                 contents={contents.popular}
             />
             <Row<TvType>
-                title='액션'
+                title='미스테리'
                 isLargeRow
-                contents={contents.actionTvs}
+                contents={contents.mysteryTvs}
             />
             <Row<TvType>
                 title='코미디'
                 isLargeRow
                 contents={contents.comedyTvs}
             />
-            <Row<TvType>
-                title='호러'
-                isLargeRow
-                contents={contents.horrorTvs}
-            />
+            <Row<TvType> title='애니' isLargeRow contents={contents.aniTvs} />
             <Row<TvType>
                 title='로맨스'
                 isLargeRow

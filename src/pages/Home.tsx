@@ -24,8 +24,8 @@ export default function Home({
                 isLargeRow
                 contents={trendContents}
             />
-            <Row<Movie> title='인기 영화' isLargeRow contents={topMovies} />
-            <Row<TV> title='인기 TV' isLargeRow contents={topTv} />
+            <Row<Movie> title='인기 영화' contents={topMovies} type='movie' />
+            <Row<TV> title='인기 TV' contents={topTv} type='tv' />
         </>
     );
 }

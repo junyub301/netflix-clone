@@ -18,7 +18,9 @@ export default function BaseScreen() {
                     onClick={() => setSignIn(true)}
                     className='login__btn'
                     value='로그인'
-                />
+                >
+                    로그인
+                </Button>
 
                 <div className='login__gradient'></div>
             </div>

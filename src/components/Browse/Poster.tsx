@@ -7,7 +7,6 @@ interface PosterProps {
     poster_path: string;
     backdrop_path: string;
     media_type?: string;
-    name?: string;
     title?: string;
     id: number;
 }
@@ -16,7 +15,6 @@ function Poster({
     isLargeRow = false,
     poster_path,
     backdrop_path,
-    name,
     title,
     media_type,
     id,
@@ -36,32 +34,34 @@ function Poster({
         }
     };
     return (
-        <PostWrap
-            onClick={onClick}
+        <PosterWrap
             className={cls("row__poster", isLargeRow ? "row__posterLarge" : "")}
-            src={`${imgBasicUrl}${isLargeRow ? poster_path : backdrop_path}`}
-            alt={name || title}
-        />
+            onClick={onClick}
+            bg={
+                isLargeRow
+                    ? `${imgBasicUrl}${poster_path}`
+                    : `${imgBasicUrl}${backdrop_path}`
+            }
+        >
+            <div className='poster__info'></div>
+        </PosterWrap>
     );
 }
 
 export default Poster;
 
-const PostWrap = styled.img`
-    cursor: pointer;
-    max-height: 100px;
-    margin-right: 10px;
-    padding: 10px;
+const PosterWrap = styled.div<{ bg: string }>`
+    position: relative;
+    height: 100px;
+    background: ${({ bg }) => `url(${bg})`} no-repeat center center;
+    background-size: contain;
     transition: transform 450ms;
-    width: 100%;
-    object-fit: contain;
+    cursor: pointer;
 
-    &:hover {
-        transform: scale(1.1);
-        opacity: 1;
-        z-index: 5;
-    }
     &.row__posterLarge {
-        max-height: 250px;
+        height: 250px;
+    }
+    .poster__info {
+        opacity: 0;
     }
 `;
