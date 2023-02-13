@@ -1,4 +1,3 @@
-import { resolveTo } from "@remix-run/router";
 import React from "react";
 import styled, { css } from "styled-components";
 

@@ -9,6 +9,7 @@ interface PosterProps {
     media_type?: string;
     title?: string;
     id: number;
+    vote_average: number;
 }
 
 function Poster({
@@ -17,6 +18,7 @@ function Poster({
     backdrop_path,
     title,
     media_type,
+    vote_average,
     id,
 }: PosterProps) {
     const imgBasicUrl = "https://image.tmdb.org/t/p/original";
@@ -43,7 +45,22 @@ function Poster({
                     : `${imgBasicUrl}${backdrop_path}`
             }
         >
-            <div className='poster__info'></div>
+            {!isLargeRow ? (
+                <>
+                    <div className='poster__background' />
+                    <div className='poster__info'>
+                        <div>{title}</div>
+                        <div>
+                            <span>⭐️ </span>
+                            <span>{vote_average.toFixed(2)}</span>
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div />
+                </>
+            )}
         </PosterWrap>
     );
 }
@@ -63,5 +80,21 @@ const PosterWrap = styled.div<{ bg: string }>`
     }
     .poster__info {
         opacity: 0;
+    }
+    &:hover {
+        transform: scale(1.1);
+        z-index: 5;
+        .poster__background {
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0.5;
+            height: inherit;
+        }
+        .poster__info {
+            position: absolute;
+            bottom: 0;
+            font-weight: 500;
+            text-align: center;
+            opacity: 1;
+        }
     }
 `;

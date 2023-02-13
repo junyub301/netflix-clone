@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { homeApi } from "../../api/request";
-import { Movie, TV } from "../../types";
 import Button from "./Button";
 
 interface BannerProps {
@@ -116,7 +115,7 @@ const BannerWrap = styled.header<{ bgImg?: string }>`
     }
 
     .banner--fadeBottom {
-        height: 7.4rem;
+        height: 9.9rem;
         background-image: linear-gradient(
             180deg,
             transparent,

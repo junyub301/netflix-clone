@@ -1,5 +1,5 @@
+import Row from "../components/browse/Row";
 import Banner from "../components/common/Banner";
-import Row from "../components/Browse/Row";
 import { Movie as MovieType } from "../types";
 
 interface MovieProps {
@@ -27,39 +27,14 @@ export default function Movie({ contents }: MovieProps) {
             />
             <Row<MovieType>
                 title='상영중인영화'
-                isLargeRow
                 contents={contents.nowPlaying}
             />
-            <Row<MovieType>
-                title='인기 콘텐츠'
-                isLargeRow
-                contents={contents.popular}
-            />
-            <Row<MovieType>
-                title='액션'
-                isLargeRow
-                contents={contents.actionMovies}
-            />
-            <Row<MovieType>
-                title='코미디'
-                isLargeRow
-                contents={contents.comedyMovies}
-            />
-            <Row<MovieType>
-                title='호러'
-                isLargeRow
-                contents={contents.horrorMovies}
-            />
-            <Row<MovieType>
-                title='로맨스'
-                isLargeRow
-                contents={contents.romanceMovies}
-            />
-            <Row<MovieType>
-                title='다큐'
-                isLargeRow
-                contents={contents.documentaries}
-            />
+            <Row<MovieType> title='인기 콘텐츠' contents={contents.popular} />
+            <Row<MovieType> title='액션' contents={contents.actionMovies} />
+            <Row<MovieType> title='코미디' contents={contents.comedyMovies} />
+            <Row<MovieType> title='호러' contents={contents.horrorMovies} />
+            <Row<MovieType> title='로맨스' contents={contents.romanceMovies} />
+            <Row<MovieType> title='다큐' contents={contents.documentaries} />
         </>
     ) : (
         <></>

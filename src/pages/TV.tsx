@@ -1,5 +1,5 @@
+import Row from "../components/browse/Row";
 import Banner from "../components/common/Banner";
-import Row from "../components/Browse/Row";
 import { TV as TvType } from "../types";
 
 interface TvProps {
@@ -27,35 +27,14 @@ export default function TV({ contents }: TvProps) {
             />
             <Row<TvType>
                 title='상영중인 드라마'
-                isLargeRow
                 contents={contents.nowPlaying}
             />
-            <Row<TvType>
-                title='인기 콘텐츠'
-                isLargeRow
-                contents={contents.popular}
-            />
-            <Row<TvType>
-                title='미스테리'
-                isLargeRow
-                contents={contents.mysteryTvs}
-            />
-            <Row<TvType>
-                title='코미디'
-                isLargeRow
-                contents={contents.comedyTvs}
-            />
-            <Row<TvType> title='애니' isLargeRow contents={contents.aniTvs} />
-            <Row<TvType>
-                title='로맨스'
-                isLargeRow
-                contents={contents.romanceTvs}
-            />
-            <Row<TvType>
-                title='다큐'
-                isLargeRow
-                contents={contents.documentaries}
-            />
+            <Row<TvType> title='인기 콘텐츠' contents={contents.popular} />
+            <Row<TvType> title='미스테리' contents={contents.mysteryTvs} />
+            <Row<TvType> title='코미디' contents={contents.comedyTvs} />
+            <Row<TvType> title='애니' contents={contents.aniTvs} />
+            <Row<TvType> title='로맨스' contents={contents.romanceTvs} />
+            <Row<TvType> title='다큐' contents={contents.documentaries} />
         </>
     ) : (
         <></>

@@ -1,18 +1,17 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import BaseScreen from "./pages/BaseScreen";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
+import { useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { userState } from "./store/user";
-import Profile from "./pages/Profile";
 import styled from "styled-components";
 import Nav from "./components/common/Nav";
+import { auth } from "./firebase";
+import BaseScreen from "./pages/BaseScreen";
+import Browse from "./pages/Browse";
 import Detail from "./pages/Detail";
 import Movie from "./pages/Movie";
-import Browse from "./pages/Browse";
+import Profile from "./pages/Profile";
 import TV from "./pages/TV";
+import { userState } from "./store/user";
 
 function App() {
     const [user, setUser] = useRecoilState(userState);

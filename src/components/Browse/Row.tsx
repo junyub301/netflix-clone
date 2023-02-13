@@ -26,12 +26,14 @@ export default function Row<T extends RowPropsTypes>({
                             (!isLargeRow && contents.backdrop_path)) && (
                             <Poster
                                 key={contents.id}
+                                {...contents}
                                 id={contents.id!}
                                 backdrop_path={contents?.backdrop_path!}
                                 poster_path={contents?.poster_path!}
                                 media_type={
                                     (contents as Trend).media_type || type
                                 }
+                                vote_average={contents.vote_average}
                                 title={
                                     (contents as Movie).title ||
                                     (contents as TV).name
@@ -54,7 +56,7 @@ const RowWrap = styled.div`
         display: flex;
         flex-wrap: nowrap;
         gap: 20px;
-        /* white-space: nowrap; */
+
         overflow-y: hidden;
         overflow-x: scroll;
         padding: 20px;
@@ -64,7 +66,6 @@ const RowWrap = styled.div`
 
         div {
             width: 220px;
-            /* display: inline-block; */
         }
     }
 `;

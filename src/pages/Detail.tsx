@@ -3,8 +3,8 @@ import { useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { movieApi, tvApi } from "../api/request";
 import Banner from "../components/common/Banner";
-import Casts from "../components/Detail/Cast/Casts";
-import Videos from "../components/Detail/Video/Videos";
+import Casts from "../components/detail/cast/Casts";
+import Videos from "../components/detail/video/Videos";
 import { MovieDetail, TvDetail } from "../types";
 
 export default function Detail() {
@@ -23,6 +23,7 @@ export default function Detail() {
         }
         getDetailContent();
     }, [id]);
+    console.log(content);
     return (
         <DetailWrap>
             {content && (

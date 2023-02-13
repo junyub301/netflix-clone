@@ -5,11 +5,17 @@ import Cast from "./Cast";
 export default function Casts({ casts }: { casts: CastType[] }) {
     return (
         <CastWrap>
-            {casts.map((cast) => (
-                <div key={cast.id} className='cast__info'>
-                    <Cast profile_path={cast.profile_path} name={cast.name} />
-                </div>
-            ))}
+            {casts.map(
+                (cast) =>
+                    cast.profile_path && (
+                        <div key={cast.id} className='cast__info'>
+                            <Cast
+                                profile_path={cast.profile_path}
+                                name={cast.name}
+                            />
+                        </div>
+                    )
+            )}
         </CastWrap>
     );
 }
@@ -17,7 +23,7 @@ export default function Casts({ casts }: { casts: CastType[] }) {
 const CastWrap = styled.div`
     display: flex;
     color: white;
-    justify-content: space-between;
+    justify-content: space-evenly;
     .cast__info {
         display: flex;
         flex-direction: column;
