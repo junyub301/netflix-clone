@@ -132,20 +132,26 @@ export default function Browse() {
             getTVContents();
         }
     }, [location.pathname]);
+
+    function rederComponent() {
+        if (homeContents !== undefined && location.pathname === "/browse") {
+            return <Home contents={homeContents} />;
+        }
+        if (
+            movieContents !== undefined &&
+            location.pathname === "/browse/movie"
+        ) {
+            return <Movie contents={movieContents} />;
+        }
+        if (tvContents !== undefined && location.pathname === "/browse/tv") {
+            return <TV contents={tvContents} />;
+        }
+    }
+
     return (
         <BrowseWrap>
-            {isLoading && <Loading />}
             <Outlet />
-            {homeContents !== undefined && location.pathname === "/browse" && (
-                <Home contents={homeContents} />
-            )}
-            {movieContents !== undefined &&
-                location.pathname === "/browse/movie" && (
-                    <Movie contents={movieContents} />
-                )}
-            {tvContents !== undefined && location.pathname === "/browse/tv" && (
-                <TV contents={tvContents} />
-            )}
+            {isLoading ? <Loading /> : rederComponent()}
         </BrowseWrap>
     );
 }

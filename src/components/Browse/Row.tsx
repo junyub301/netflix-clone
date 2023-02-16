@@ -26,7 +26,6 @@ export default function Row<T extends RowPropsTypes>({
                             (!isLargeRow && contents.backdrop_path)) && (
                             <Poster
                                 key={contents.id}
-                                {...contents}
                                 id={contents.id!}
                                 backdrop_path={contents?.backdrop_path!}
                                 poster_path={contents?.poster_path!}

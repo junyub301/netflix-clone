@@ -6,101 +6,168 @@ import Banner from "../components/common/Banner";
 import Casts from "../components/detail/cast/Casts";
 import Videos from "../components/detail/video/Videos";
 import { MovieDetail, TvDetail } from "../types";
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import Poster from "../components/browse/Poster";
+import Loading from "./Loading";
 
 export default function Detail() {
     const { id } = useParams();
     const { pathname } = useLocation();
     const [content, setContent] = useState<MovieDetail & TvDetail>();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     useEffect(() => {
         async function getDetailContent() {
             if (pathname.includes("movie")) {
-                const { data } = await movieApi.fetchDetailMovie(+id!);
-                setContent(data);
+                try {
+                    setIsLoading(true);
+
+                    const { data } = await movieApi.fetchDetailMovie(+id!);
+                    setContent(data);
+                } catch (e) {
+                    console.log(e);
+                } finally {
+                    setIsLoading(false);
+                }
             } else {
-                const { data } = await tvApi.fetchDetailTv(+id!);
-                setContent(data);
+                try {
+                    setIsLoading(true);
+                    const { data } = await tvApi.fetchDetailTv(+id!);
+                    setContent(data);
+                } catch (e) {
+                    console.log(e);
+                } finally {
+                    setIsLoading(false);
+                }
             }
         }
         getDetailContent();
+        window.scrollTo(0, 0);
     }, [id]);
-    console.log(content);
     return (
         <DetailWrap>
-            {content && (
-                <>
-                    <Banner movieInfo={content} />
-                    <div className='detail__content'>
-                        <div className='content__info'>
-                            <h2>
-                                {content.name ||
-                                    content.original_name ||
-                                    content.title ||
-                                    content.original_title}
-                            </h2>
-                            <div>
-                                <div className='info__row'>
-                                    <h3 className='info__title'>평점: </h3>
-                                    <div className='info__value'>
-                                        {content.vote_average.toFixed(2)}
-                                    </div>
-                                </div>
-                                <div className='info__row'>
-                                    <h3 className='info__title'>장르: </h3>
-                                    <div className='info__value'>
-                                        {content.genres.map((genre) => (
-                                            <span key={genre.id}>
-                                                {genre.name}{" "}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
+            {isLoading ? (
+                <Loading />
+            ) : (
+                content && (
+                    <>
+                        <Banner movieInfo={content} />
+                        <div className='detail__content'>
+                            <div className='content__info'>
+                                <h2>
+                                    {content.name ||
+                                        content.original_name ||
+                                        content.title ||
+                                        content.original_title}
+                                </h2>
                                 <div>
-                                    <h3 className='info__title'>키워드</h3>
-                                    <div className='info__value'>
-                                        <div className='keywords'>
-                                            {content.keywords.keywords
-                                                ? content.keywords.keywords?.map(
-                                                      (keyword) => (
-                                                          <span
-                                                              className='keyword'
-                                                              key={keyword.id}
-                                                          >
-                                                              #{keyword.name}
-                                                          </span>
+                                    <div className='info__row'>
+                                        <h3 className='info__title'>평점: </h3>
+                                        <div className='info__value'>
+                                            {content.vote_average.toFixed(2)}
+                                        </div>
+                                    </div>
+                                    <div className='info__row'>
+                                        <h3 className='info__title'>장르: </h3>
+                                        <div className='info__value'>
+                                            {content.genres.map((genre) => (
+                                                <span key={genre.id}>
+                                                    {genre.name}{" "}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 className='info__title'>키워드</h3>
+                                        <div className='info__value'>
+                                            <div className='keywords'>
+                                                {content.keywords.keywords
+                                                    ? content.keywords.keywords?.map(
+                                                          (keyword) => (
+                                                              <span
+                                                                  className='keyword'
+                                                                  key={
+                                                                      keyword.id
+                                                                  }
+                                                              >
+                                                                  #
+                                                                  {keyword.name}
+                                                              </span>
+                                                          )
                                                       )
-                                                  )
-                                                : content.keywords.results?.map(
-                                                      (keyword) => (
-                                                          <span
-                                                              className='keyword'
-                                                              key={keyword.id}
-                                                          >
-                                                              #{keyword.name}
-                                                          </span>
-                                                      )
-                                                  )}
+                                                    : content.keywords.results?.map(
+                                                          (keyword) => (
+                                                              <span
+                                                                  className='keyword'
+                                                                  key={
+                                                                      keyword.id
+                                                                  }
+                                                              >
+                                                                  #
+                                                                  {keyword.name}
+                                                              </span>
+                                                          )
+                                                      )}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        {content.videos.results.length > 0 && (
-                            <div className='detail__video'>
-                                <h2>트레일러</h2>
-                                <Videos
-                                    key={content.id}
-                                    videos={content.videos.results}
+                            {content.videos.results.length > 0 && (
+                                <div className='detail__video'>
+                                    <h2>트레일러</h2>
+                                    <Videos
+                                        key={content.id}
+                                        videos={content.videos.results}
+                                    />
+                                </div>
+                            )}
+                            <div className='detail__casts'>
+                                <h2>배우</h2>
+                                <Casts
+                                    casts={content.credits.cast.slice(0, 6)}
                                 />
                             </div>
-                        )}
-                        <div className='detail__casts'>
-                            <h2>배우</h2>
-                            <Casts casts={content.credits.cast.slice(0, 6)} />
+                            {content.recommendations.results.length > 0 && (
+                                <div className='content__recommendations'>
+                                    <h2>추천 콘텐츠</h2>
+                                    <Swiper
+                                        modules={[Navigation]}
+                                        spaceBetween={20}
+                                        slidesPerView={6}
+                                        navigation={true}
+                                    >
+                                        {content.recommendations.results.map(
+                                            (value) => (
+                                                <SwiperSlide key={value.id}>
+                                                    <Poster
+                                                        backdrop_path={
+                                                            value.backdrop_path!
+                                                        }
+                                                        id={value.id}
+                                                        poster_path={
+                                                            value.poster_path!
+                                                        }
+                                                        vote_average={
+                                                            value.vote_average!
+                                                        }
+                                                        isLargeRow
+                                                        media_type={
+                                                            value.media_type
+                                                        }
+                                                        title={value.name}
+                                                    />
+                                                </SwiperSlide>
+                                            )
+                                        )}
+                                    </Swiper>
+                                </div>
+                            )}
                         </div>
-
-                        <div className='content__recommendations'></div>
-                    </div>
-                </>
+                    </>
+                )
             )}
         </DetailWrap>
     );
@@ -149,6 +216,22 @@ const DetailWrap = styled.div`
                     column-gap: 5px;
                     display: flex;
                     margin-top: auto;
+                }
+            }
+        }
+        .content__recommendations {
+            width: 100%;
+            color: white;
+            height: 150px;
+            .swiper-button- {
+                &next,
+                &prev {
+                    height: 100%;
+                    top: 13px;
+                    z-index: 3;
+                }
+                &disabled {
+                    opacity: 0;
                 }
             }
         }

@@ -25,14 +25,10 @@ function Poster({
     const navigate = useNavigate();
     const location = useLocation();
     const onClick = () => {
-        if (
-            location.pathname.includes("movie") ||
-            location.pathname.includes("tv")
-        ) {
-            navigate(`${location.pathname}/${id}`);
+        if (location.pathname.includes("movie") || media_type === "movie") {
+            navigate(`/browse/movie/${id}`);
         } else {
-            let pathName = `${location.pathname}/${media_type}`;
-            navigate(`${pathName}/${id}`);
+            navigate(`/browse/tv/${id}`);
         }
     };
     return (
